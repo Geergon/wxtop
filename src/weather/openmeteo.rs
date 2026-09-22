@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct OpenMeteo {
     pub latitude: f64,
     pub longitude: f64,
@@ -17,7 +17,7 @@ pub struct OpenMeteo {
     pub daily: Daily,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct CurrentUnits {
     pub time: String,
     pub interval: String,
@@ -35,7 +35,7 @@ pub struct CurrentUnits {
     pub wind_gusts_10m: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct Current {
     pub time: i64,
     pub interval: u32,
@@ -53,7 +53,7 @@ pub struct Current {
     pub wind_gusts_10m: f64,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct HourlyUnits {
     pub time: String,
     pub temperature_2m: String,
@@ -68,7 +68,7 @@ pub struct HourlyUnits {
     pub wind_direction_10m: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct Hourly {
     pub time: Vec<i64>,
     pub temperature_2m: Vec<f64>,
@@ -83,7 +83,7 @@ pub struct Hourly {
     pub wind_direction_10m: Vec<u16>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct DailyUnits {
     pub time: String,
     pub weather_code: String,
@@ -100,7 +100,7 @@ pub struct DailyUnits {
     pub wind_direction_10m_dominant: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct Daily {
     pub time: Vec<i64>,
     pub weather_code: Vec<u8>,
