@@ -42,16 +42,15 @@ fn initial_prompt(model: &mut Model, frame: &mut Frame) {
         .title_bottom(instruction)
         .title_alignment(Alignment::Right);
 
-    let search_text = if model.init_prompt_state.search_query.is_empty() {
+    let search_text = if model.init_prompt_state.input.user_input.is_empty() {
         Paragraph::new("Type to search...").block(search_block)
     } else {
-        Paragraph::new(model.init_prompt_state.search_query.to_owned()).block(search_block)
+        Paragraph::new(model.init_prompt_state.input.user_input.to_owned()).block(search_block)
     };
     frame.render_widget(search_text, chunks[1]);
 
-    if !model.init_prompt_state.search_query.is_empty() {
-        let cursor_x =
-            chunks[1].x + 1 + model.init_prompt_state.search_query.chars().count() as u16;
+    if !model.init_prompt_state.input.user_input.is_empty() {
+        let cursor_x = chunks[1].x + 1 + model.init_prompt_state.input.character_index as u16;
         let cursor_y = chunks[1].y + 1;
         frame.set_cursor_position((cursor_x, cursor_y));
     }
