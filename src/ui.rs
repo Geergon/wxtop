@@ -12,13 +12,16 @@ use ratatui::{
     Frame,
 };
 
-use crate::{CurrentScreen, Model};
+use crate::app::{CurrentScreen, Model};
 
 pub fn view(model: &mut Model, frame: &mut Frame) {
     match model.current_screen {
         CurrentScreen::Prompt => initial_prompt(model, frame),
+        CurrentScreen::Main => main_screen(model, frame),
     }
 }
+
+fn main_screen(model: &mut Model, frame: &mut Frame) {}
 
 fn initial_prompt(model: &mut Model, frame: &mut Frame) {
     let prompt_area = centered_rect(80, 70, frame.area());

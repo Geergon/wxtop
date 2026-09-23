@@ -3,12 +3,13 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use color_eyre::eyre::{self, OptionExt};
+use color_eyre::eyre::{self, OptionExt, bail};
 use serde::{Deserialize, Serialize};
 
 #[derive(Default, Deserialize, Serialize)]
 pub struct Config {
     pub current_city: String,
+    pub coordinates: (f64, f64),
 }
 
 pub fn init_config() -> color_eyre::Result<()> {
@@ -27,18 +28,18 @@ pub fn init_config() -> color_eyre::Result<()> {
     Ok(())
 }
 
-pub fn read_config() -> color_eyre::Result<()> {
+pub fn read_config() -> color_eyre::Result<Config> {
     let config_path = dirs::config_dir()
         .ok_or_eyre("failed to get config dir path")?
         .join("wxtop/config.toml");
 
     if !config_path.exists() {
-        return Ok(());
+        bail!("config path does not exist");
     }
     let content = fs::read_to_string(&config_path)?;
     let config: Config = toml::from_str(&content)?;
 
-    Ok(())
+    Ok(config)
 }
 
 pub fn write_config(config: &Config) -> color_eyre::Result<()> {
